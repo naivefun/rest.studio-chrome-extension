@@ -1,6 +1,6 @@
 {
   "name": "REST.Studio extension",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "manifest_version": 2,
   "description": "REST.Studio extension",
   "icons": {
@@ -17,6 +17,8 @@
     ]
   },
   "permissions": [
+    "http://*/*",
+    "https://*/*",
     "cookies",
     "webRequest",
     "webRequestBlocking",
@@ -24,7 +26,8 @@
   ],
   "externally_connectable": {
     "matches": [
-      "*://localhost/*"
+      "*://localhost/*",
+      "*://*.rest.studio/*"
     ]
   }
 }

@@ -1,3 +1,4 @@
+console.info('loading REST.Studio Chrome Extension');
 var HEADER_KEY = 'RS_HEADER_KEY';
 var HEADER_REPO = {};
 // region classes

@@ -1,9 +1,12 @@
+
+
+console.info('loading REST.Studio Chrome Extension');
+
 declare const chrome: any,
     axios: any, _: any;
-
 const HEADER_KEY = 'RS_HEADER_KEY';
-const HEADER_REPO = {};
 
+const HEADER_REPO = {};
 // region classes
 class HttpService {
     sendRequest(options: any) {

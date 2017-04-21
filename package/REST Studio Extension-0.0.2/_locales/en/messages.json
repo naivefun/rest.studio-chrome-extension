@@ -1,0 +1,10 @@
+{
+  "appName": {
+    "message": "REST Studio Extension",
+    "description": "The name of the application"
+  },
+  "appDescription": {
+    "message": "REST.Studio Extension",
+    "description": "The description of the application"
+  }
+}

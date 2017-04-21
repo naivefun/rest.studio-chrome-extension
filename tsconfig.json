@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES6",
+    "target": "ES5",
     "module": "ES6",
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
@@ -10,6 +10,9 @@
     "noEmit": true,
     "noEmitHelpers": true,
     "importHelpers": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "lib": [
+      "es2015"
+    ]
   }
 }

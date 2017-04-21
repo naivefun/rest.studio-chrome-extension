@@ -13,7 +13,7 @@ gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
     'app/_locales/**',
-    '!app/scripts.babel',
+    '!app/scripts.typescript',
     '!app/*.json',
     '!app/*.html',
   ], {
@@ -21,20 +21,6 @@ gulp.task('extras', () => {
     dot: true
   }).pipe(gulp.dest('dist'));
 });
-
-function lint(files, options) {
-  return () => {
-    return gulp.src(files)
-      .pipe($.eslint(options))
-      .pipe($.eslint.format());
-  };
-}
-
-gulp.task('lint', lint('app/scripts.babel/**/*.js', {
-  env: {
-    es6: true
-  }
-}));
 
 gulp.task('images', () => {
   return gulp.src('app/images/**/*')
@@ -81,27 +67,18 @@ gulp.task('chromeManifest', () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('babel', () => {
-  // return gulp.src('app/scripts.babel/**/*.js')
-  //     .pipe($.babel({
-  //       presets: ['es2015']
-  //     }))
-  //     .pipe(gulp.dest('app/scripts'));
+gulp.task('typescript', () => {
   return gulp.src('app/scripts.typescript/*.ts')
     .pipe(ts({
       target: 'ES5',
       module: 'NONE'
     }))
     .pipe(gulp.dest('app/scripts'));
-  // let tsResult = gulp.src("app/scripts.typescript/background.ts") // or tsProject.src()
-  //   .pipe(tsProject());
-  //
-  // return tsResult.js.pipe(gulp.dest('app/scripts'));
 });
 
 gulp.task('clean', del.bind(null, ['.tmp', 'dist']));
 
-gulp.task('watch', ['lint', 'babel'], () => {
+gulp.task('watch', ['typescript'], () => {
   $.livereload.listen();
 
   gulp.watch([
@@ -112,7 +89,7 @@ gulp.task('watch', ['lint', 'babel'], () => {
     'app/_locales/**/*.json'
   ]).on('change', $.livereload.reload);
 
-  gulp.watch('app/scripts.typescript/**/*.ts', ['lint', 'babel']);
+  gulp.watch('app/scripts.typescript/**/*.ts', ['typescript']);
   gulp.watch('bower.json', ['wiredep']);
 });
 
@@ -137,7 +114,7 @@ gulp.task('package', function () {
 
 gulp.task('build', (cb) => {
   runSequence(
-    'lint', 'babel', 'chromeManifest',
+    'typescript', 'chromeManifest',
     ['html', 'images', 'extras'],
     'size', cb);
 });
